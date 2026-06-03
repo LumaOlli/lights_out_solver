@@ -309,26 +309,26 @@ function resolver_interface!(estado)
     texto = ""
 
     texto *= "==============================\n"
-    texto *= "TABULEIRO INICIAL\n"
+    texto *= " TABULEIRO INICIAL\n"
     texto *= "==============================\n"
     texto *= matriz_para_texto(estado.tabuleiro)
 
     texto *= "\n==============================\n"
-    texto *= "MATRIZ DE INFLUÊNCIA A\n"
+    texto *= " MATRIZ DE INFLUÊNCIA A\n"
     texto *= "==============================\n"
     texto *= matriz_para_texto(A)
 
     texto *= "\n==============================\n"
-    texto *= "VETOR b\n"
+    texto *= " VETOR b\n"
     texto *= "==============================\n"
     texto *= vetor_para_texto(b) * "\n"
 
     texto *= "\n==============================\n"
-    texto *= "MATRIZ AUMENTADA ESCALONADA\n"
+    texto *= " MATRIZ AUMENTADA ESCALONADA\n"
     texto *= "==============================\n"
     texto *= matriz_para_texto(matriz_escalonada)
 
-    texto *= "\nPosto da matriz A: "
+    texto *= "\n Posto da matriz A: "
     texto *= string(length(colunas_pivo)) * "\n"
 
     if solucao === nothing
@@ -341,21 +341,21 @@ function resolver_interface!(estado)
     mapa = vetor_como_tabuleiro(solucao, estado.n)
 
     texto *= "\n==============================\n"
-    texto *= "VETOR SOLUÇÃO x\n"
+    texto *= " VETOR SOLUÇÃO x\n"
     texto *= "==============================\n"
     texto *= vetor_para_texto(solucao) * "\n"
 
     texto *= "\n==============================\n"
-    texto *= "MAPA DE JOGADAS\n"
+    texto *= " MAPA DE JOGADAS\n"
     texto *= "==============================\n"
-    texto *= "1 = pressionar | 0 = não pressionar\n"
+    texto *= " 1 = pressionar | 0 = não pressionar\n"
     texto *= matriz_para_texto(mapa)
 
     tabuleiro_atual = copy(estado.tabuleiro)
     contador = 1
 
     texto *= "\n==============================\n"
-    texto *= "RESOLUÇÃO PASSO A PASSO\n"
+    texto *= " RESOLUÇÃO PASSO A PASSO\n"
     texto *= "==============================\n"
 
     for posicao in eachindex(solucao)
@@ -363,12 +363,12 @@ function resolver_interface!(estado)
             i = div(posicao - 1, estado.n) + 1
             j = mod(posicao - 1, estado.n) + 1
 
-            texto *= "\nJogada $contador\n"
+            texto *= "\n Jogada $contador\n"
             texto *= "Pressionar posição ($i, $j)\n"
 
             aplicar_jogada!(tabuleiro_atual, i, j, direcoes)
 
-            texto *= "\nTabuleiro após a jogada:\n"
+            texto *= "\n Tabuleiro após a jogada:\n"
             texto *= matriz_para_texto(tabuleiro_atual)
 
             contador += 1
@@ -376,7 +376,7 @@ function resolver_interface!(estado)
     end
 
     texto *= "\n==============================\n"
-    texto *= "TABULEIRO FINAL\n"
+    texto *= " TABULEIRO FINAL\n"
     texto *= "==============================\n"
     texto *= matriz_para_texto(tabuleiro_atual)
 
