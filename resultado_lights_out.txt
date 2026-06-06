@@ -1,9 +1,9 @@
 ==============================
  TABULEIRO INICIAL
 ==============================
+0 0 1
+0 1 1
 1 0 1
-1 1 1
-0 1 0
 
 ==============================
  MATRIZ DE INFLUÊNCIA A
@@ -21,58 +21,66 @@
 ==============================
  VETOR b
 ==============================
-1 0 1 1 1 1 0 1 0
+0 0 1 0 1 1 1 0 1
 
 ==============================
  MATRIZ AUMENTADA ESCALONADA
 ==============================
-1 1 0 1 0 0 0 0 0 1
+1 1 0 1 0 0 0 0 0 0
 0 1 1 0 0 1 0 0 0 1
-0 0 1 1 1 0 0 0 0 1
-0 0 0 1 0 1 1 0 0 0
-0 0 0 0 1 0 1 1 1 1
+0 0 1 1 1 0 0 0 0 0
+0 0 0 1 0 1 1 0 0 1
+0 0 0 0 1 0 1 1 1 0
 0 0 0 0 0 1 0 1 0 0
 0 0 0 0 0 0 1 0 1 0
-0 0 0 0 0 0 0 1 0 1
-0 0 0 0 0 0 0 0 1 0
+0 0 0 0 0 0 0 1 0 0
+0 0 0 0 0 0 0 0 1 1
 
  Posto da matriz A: 9
 
 ==============================
  VETOR SOLUÇÃO x
 ==============================
-0 0 0 1 0 1 0 1 0
+1 1 0 0 0 0 1 0 1
 
 ==============================
  MAPA DE JOGADAS
 ==============================
  1 = pressionar | 0 = não pressionar
+1 1 0
 0 0 0
 1 0 1
-0 1 0
 
 ==============================
  RESOLUÇÃO PASSO A PASSO
 ==============================
 
  Jogada 1
-Pressionar posição (2, 1)
+Pressionar posição (1, 1)
 
  Tabuleiro após a jogada:
-0 0 1
-0 0 1
-1 1 0
+1 1 1
+1 1 1
+1 0 1
 
  Jogada 2
-Pressionar posição (2, 3)
+Pressionar posição (1, 2)
 
  Tabuleiro após a jogada:
 0 0 0
-0 1 0
-1 1 1
+1 0 1
+1 0 1
 
  Jogada 3
-Pressionar posição (3, 2)
+Pressionar posição (3, 1)
+
+ Tabuleiro após a jogada:
+0 0 0
+0 0 1
+0 1 1
+
+ Jogada 4
+Pressionar posição (3, 3)
 
  Tabuleiro após a jogada:
 0 0 0
