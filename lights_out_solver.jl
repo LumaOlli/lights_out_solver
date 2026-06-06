@@ -216,7 +216,7 @@ mutable struct AppState
     tabuleiro::Matrix{Int}
     botoes::Vector{GtkButton}
     grid::GtkGrid
-    saida::GtkTextView
+    saida::GtkLabel
     tamanho_combo::GtkComboBoxText
     vizinhanca_combo::GtkComboBoxText
 end
@@ -253,10 +253,22 @@ function atualizar_botoes!(estado)
     showall(estado.grid)
 end
 
-function escrever_saida!(estado, texto)
-    buffer = GtkTextBuffer()
-    set_gtk_property!(buffer, :text, texto)
-    set_gtk_property!(estado.saida, :buffer, buffer)
+function salvar_resultado_txt(texto)
+    open("resultado_lights_out.txt", "w") do arquivo
+        write(arquivo, texto)
+    end
+end
+
+function escrever_saida!(estado, texto; salvar=false)
+    texto_interface = texto
+
+    if salvar
+        salvar_resultado_txt(texto)
+        texto_interface *= "\n\nResultado salvo automaticamente em "
+        texto_interface *= "resultado_lights_out.txt\n"
+    end
+
+    set_gtk_property!(estado.saida, :label, texto_interface)
 end
 
 function criar_tabuleiro_vazio!(estado)
@@ -334,7 +346,7 @@ function resolver_interface!(estado)
     if solucao === nothing
         texto *= "\nEste tabuleiro não possui solução.\n"
         texto *= "Não há combinação de jogadas capaz de zerar o jogo.\n"
-        escrever_saida!(estado, texto)
+        escrever_saida!(estado, texto; salvar=true)
         return
     end
 
@@ -386,7 +398,7 @@ function resolver_interface!(estado)
         texto *= "\nValidação: a solução não zerou o tabuleiro.\n"
     end
 
-    escrever_saida!(estado, texto)
+    escrever_saida!(estado, texto; salvar=true)
 end
 
 function criar_interface()
@@ -431,18 +443,17 @@ function criar_interface()
     grid = GtkGrid()
     push!(caixa_principal, grid)
 
-    saida = GtkTextView()
-
-    set_gtk_property!(saida, :editable, false)
-    set_gtk_property!(saida, :monospace, true)
-    set_gtk_property!(saida, :wrap_mode, 0)
+    saida = GtkLabel("")
+    set_gtk_property!(saida, :selectable, false)
+    set_gtk_property!(saida, :xalign, 0.0)
+    set_gtk_property!(saida, :yalign, 0.0)
+    set_gtk_property!(saida, :wrap, false)
 
     scroll = GtkScrolledWindow()
-
     set_gtk_property!(scroll, :vexpand, true)
     set_gtk_property!(scroll, :hexpand, true)
-    set_gtk_property!(scroll, :height_request, 420)
-    set_gtk_property!(scroll, :width_request, 850)
+    set_gtk_property!(scroll, :height_request, 520)
+    set_gtk_property!(scroll, :width_request, 1100)
 
     push!(scroll, saida)
     push!(caixa_principal, scroll)
